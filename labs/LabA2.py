@@ -62,6 +62,7 @@ with open('A2Data.csv') as f:
         avgPts[rStr].add(f)
 
 def drawGraph(title, sepTxt, pow):
+    print("Drawing Graph: \"%s\"" % title)
     plt.title(title)
     plt.ylabel("Force (N), +/- %.3f N" % FORCE_INSTRUMENTAL_UNCERTAINTY)
     plt.xlabel("%sseparation (m^%d)" % (sepTxt, pow))
@@ -88,6 +89,7 @@ def drawGraph(title, sepTxt, pow):
     xmin, xmax = plt.gca().get_xlim()
     plt.axline((xmin, (m * xmin) + b), (xmax, (m * xmax) + b))
     plt.show()
+    print("------\n")
 
 
 drawGraph("E-Force vs. charge separation", "", 1)
