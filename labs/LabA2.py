@@ -93,5 +93,6 @@ def drawGraph(title, sepTxt, pow):
 
 
 drawGraph("E-Force vs. charge separation", "", 1)
+drawGraph("E-Force vs. Inv. of charge separation", "inverse of ", -1)
 drawGraph("E-Force vs. Inv. Sqr of charge separation", "inverse-square of ", -2)
 drawGraph("E-Force vs. Inv. Cube of charge separation", "inverse-cube of ", -3)
