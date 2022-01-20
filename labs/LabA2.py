@@ -90,5 +90,6 @@ def drawGraph(title, sepTxt, pow):
     plt.show()
 
 
-drawGraph("Force vs. charge separation", "", 1)
-drawGraph("Force vs. Inv. Sqr of charge separation", "inverse-square of ", -2)
+drawGraph("E-Force vs. charge separation", "", 1)
+drawGraph("E-Force vs. Inv. Sqr of charge separation", "inverse-square of ", -2)
+drawGraph("E-Force vs. Inv. Cube of charge separation", "inverse-cube of ", -3)
