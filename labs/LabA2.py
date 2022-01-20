@@ -1,6 +1,7 @@
 import csv
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib.ticker import FormatStrFormatter
 
 """
 0) read each value. sum average forces for each displacement
@@ -60,11 +61,17 @@ with open('A2Data.csv') as f:
             avgPts[rStr] = DokiAvgPoint(FORCE_INSTRUMENTAL_UNCERTAINTY)
         avgPts[rStr].add(f)
 
+axisFormat = FormatStrFormatter("%.3f")
+
 def drawGraph(title, sepTxt, pow):
     print("Drawing Graph: \"%s\"" % title)
     plt.title(title)
     plt.ylabel("Force (N), +/- %.3f N" % FORCE_INSTRUMENTAL_UNCERTAINTY)
     plt.xlabel("%sseparation (m^%d)" % (sepTxt, pow))
+
+    gca = plt.gca()
+    gca.yaxis.set_major_formatter(axisFormat)
+    gca.xaxis.set_major_formatter(axisFormat)
 
     xArr = []
     yArr = []
@@ -85,12 +92,11 @@ def drawGraph(title, sepTxt, pow):
 
     m, b = np.polyfit(np.array(xArr), np.array(yArr), 1)
     print("BestFit: m=%.3f, b=%.3f" % (m, b))
-    xmin, xmax = plt.gca().get_xlim()
+    xmin, xmax = gca.get_xlim()
     plt.axline((xmin, (m * xmin) + b), (xmax, (m * xmax) + b))
     plt.show()
     plt.savefig('filename.png', dpi=300)
     print("------\n")
-
 
 drawGraph("E-Force vs. charge separation", "", 1)
 drawGraph("E-Force vs. Inv. of charge separation", "inverse of ", -1)
