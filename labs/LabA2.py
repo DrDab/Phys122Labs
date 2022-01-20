@@ -96,7 +96,6 @@ def drawGraph(title, sepTxt, pow):
     xmin, xmax = gca.get_xlim()
     plt.axline((xmin, (m * xmin) + b), (xmax, (m * xmax) + b))
     plt.show()
-    plt.savefig('filename.png', dpi=300)
     print("------\n")
 
 drawGraph("E-Force vs. charge separation", "", 1)
