@@ -65,12 +65,6 @@ with open('A2Data.csv') as f:
 
 axisFormat = FormatStrFormatter("%%.%df" % AXES_DECIMAL_POINTS)
 
-def rSqrd(x, y):
-    """ Return R^2 where x and y are array-like."""
-
-    slope, intercept, r_value, p_value, std_err = scipy.stats.linregress(x, y)
-    return r_value**2
-
 def drawGraph(title, sepTxt, pow):
     print("Drawing Graph: \"%s\"" % title)
     plt.title(title)
@@ -100,8 +94,9 @@ def drawGraph(title, sepTxt, pow):
 
     npXarr = np.array(xArr)
     npYarr = np.array(yArr)
-    m, b = np.polyfit(npXarr, npYarr, 1)
-    rS = rSqrd(npXarr, npYarr)
+
+    m, b, r_value, p_value, std_err = scipy.stats.linregress(npXarr, npYarr)
+    rS = r_value ** 2
     print("BestFit: m=%.3f, b=%.3f, rSqrd=%.3f" % (m, b, rS))
     xmin, xmax = gca.get_xlim()
     plt.axline((xmin, (m * xmin) + b), (xmax, (m * xmax) + b))
