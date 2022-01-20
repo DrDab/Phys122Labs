@@ -11,6 +11,7 @@ from matplotlib.ticker import FormatStrFormatter
 """
 
 FORCE_INSTRUMENTAL_UNCERTAINTY = 0.005
+AXES_DECIMAL_POINTS = 3
 
 class DokiAvgPoint:
     def __init__(self, insError):
@@ -61,7 +62,7 @@ with open('A2Data.csv') as f:
             avgPts[rStr] = DokiAvgPoint(FORCE_INSTRUMENTAL_UNCERTAINTY)
         avgPts[rStr].add(f)
 
-axisFormat = FormatStrFormatter("%.3f")
+axisFormat = FormatStrFormatter("%%.%df" % AXES_DECIMAL_POINTS)
 
 def drawGraph(title, sepTxt, pow):
     print("Drawing Graph: \"%s\"" % title)
