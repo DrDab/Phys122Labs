@@ -11,7 +11,7 @@ from matplotlib.ticker import FormatStrFormatter
 """
 
 FORCE_INSTRUMENTAL_UNCERTAINTY = 0.005
-AXES_DECIMAL_POINTS = 3
+AXES_DECIMAL_POINTS = 2
 
 class DokiAvgPoint:
     def __init__(self, insError):
