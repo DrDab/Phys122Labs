@@ -10,6 +10,8 @@ import math
 3) draw best-fit line
 """
 
+FORCE_INSTRUMENTAL_UNCERTAINTY = 0.005
+
 class DokiAvgPoint:
     def __init__(self, insError):
         self.n = 0
@@ -49,8 +51,6 @@ class DokiAvgPoint:
     
 avgPts = {}
 
-FORCE_INSTRUMENTAL_UNCERTAINTY = 0.005
-
 with open('A2Data.csv') as f:
     reader = csv.DictReader(f)
     for row in reader:
@@ -61,30 +61,34 @@ with open('A2Data.csv') as f:
             avgPts[rStr] = DokiAvgPoint(FORCE_INSTRUMENTAL_UNCERTAINTY)
         avgPts[rStr].add(f)
 
+def drawGraph(title, sepTxt, pow):
+    plt.title(title)
+    plt.ylabel("Force (N), +/- %.3f N" % FORCE_INSTRUMENTAL_UNCERTAINTY)
+    plt.xlabel("%sseparation (m^%d)" % (sepTxt, pow))
 
-plt.title("Graph1")
-plt.ylabel("Force (N), +/- %.3f N" % FORCE_INSTRUMENTAL_UNCERTAINTY)
-plt.xlabel("Inverse-%s of Separation (m^%d)" % ("square", -2))
+    xArr = []
+    yArr = []
 
-xArr = []
-yArr = []
+    for rStr in avgPts:
+        r = float(rStr)
+        dap = avgPts[rStr]
 
-for rStr in avgPts:
-    r = float(rStr)
-    dap = avgPts[rStr]
+        x = r ** pow
+        y = dap.avg()
+        xArr.append(x)
+        yArr.append(y)
 
-    x = r ** -2
-    y = dap.avg()
-    xArr.append(x)
-    yArr.append(y)
+        print("Plotting Point: %s" % dap)
+        print("@(%.3f, %.3f)" % (x, y))
+        plt.scatter(x, y)
+        plt.errorbar(x, y, yerr=dap.error(), fmt='--o', barsabove=True, capsize=8)
 
-    print("Plotting Point: %s" % dap)
-    print("@(%.3f, %.3f)" % (x, y))
-    plt.scatter(x, y)
-    plt.errorbar(x, y, yerr=dap.error(), fmt='--o', barsabove=True, capsize=8)
+    m, b = np.polyfit(np.array(xArr), np.array(yArr), 1)
+    print("BestFit: m=%.3f, b=%.3f" % (m, b))
+    xmin, xmax = plt.gca().get_xlim()
+    plt.axline((xmin, (m * xmin) + b), (xmax, (m * xmax) + b))
+    plt.show()
 
-m, b = np.polyfit(np.array(xArr), np.array(yArr), 1)
-print("BestFit: m=%.3f, b=%.3f" % (m, b))
-xmin, xmax = plt.gca().get_xlim()
-plt.axline((xmin, (m * xmin) + b), (xmax, (m * xmax) + b))
-plt.show()
+
+drawGraph("Force vs. charge separation", "", 1)
+drawGraph("Force vs. Inv. Sqr of charge separation", "inverse-square of ", -2)
