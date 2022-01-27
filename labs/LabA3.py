@@ -87,8 +87,9 @@ def drawGraph(title, sepTxt, pow):
         xArr.append(x)
         yArr.append(y)
 
-        print("Plotting Point: %s" % dap)
-        print("@(%.3f, %.3f)" % (x, y))
+        #print("Plotting Point: %s" % dap)
+        #print("@(%.3f, %.3f)" % (x, y))
+        print("(%.3f, %.3f), error=%.3f" % (x, y, dap.error()))
         plt.scatter(x, y)
         plt.errorbar(x, y, yerr=dap.error(), fmt='--o', barsabove=True, capsize=8)
 
