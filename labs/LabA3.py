@@ -69,7 +69,7 @@ def drawGraph(title, sepTxt, pow):
     print("Drawing Graph: \"%s\"" % title)
     plt.title(title)
     plt.ylabel("Force (N), +/- %.3f N" % FORCE_INSTRUMENTAL_UNCERTAINTY)
-    plt.xlabel("%sseparation (m^%.1f)" % (sepTxt, pow))
+    plt.xlabel("%sseparation (m^%.0f)" % (sepTxt, pow))
 
     gca = plt.gca()
     gca.yaxis.set_major_formatter(axisFormat)
@@ -106,4 +106,4 @@ def drawGraph(title, sepTxt, pow):
 #drawGraph("Mint-Force vs. separation^2", "square of ", 2)
 #drawGraph("Mint-Force vs. sqrt(separation)", "sqrt of ", 0.5)
 #drawGraph("Mint-Force vs. particle separation", "", 1)
-drawGraph("M-Force vs. Inverse of particle separation", "inverse of ", -1)
+drawGraph("Mint-Force vs. Inverse of particle separation", "inverse of ", -1)
