@@ -4,7 +4,12 @@ def getExamScore(mt1, mt2, final):
     finals = final / 100.0
     g1 = (mt1s + mt2s + finals) * .6 / 3
     g2 = (max(mt1s, mt2s) * .2) + (finals * .4)
-    return max(g1, g2)
+    if g1 > g2:
+        print("Using method 1 of exam scaling")
+        return g1
+    else:
+        print("Using method 2 of exam scaling")
+        return g2
 
 def percentToGPA(percent):
     if percent >= .92:
@@ -39,7 +44,8 @@ print("Enter your midterm 2")
 mt2 = float(input())
 print("Enter your final")
 final = float(input())
-
+print("-------------")
+print()
 examScore = getExamScore(mt1, mt2, final)
 assScore = ass * .4
 assScoreS = assScore / 100.0
