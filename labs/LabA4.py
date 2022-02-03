@@ -108,4 +108,4 @@ def drawGraph(title, sepTxt, pow):
 #drawGraph("Mint-Force vs. sqrt(separation)", "sqrt of ", 0.5)
 #drawGraph("Mint-Force vs. particle separation", "", 1)
 #drawGraph("Mint-Force vs. Inverse of particle separation", "inverse of ", -1
-drawGraph("Mint-Force vs. Inv. Sqr of charge separation", "inverse-square of ", -2)
+drawGraph("Exotic-Force vs. Inv. Sqr of charge separation", "inverse-square of ", -2)
