@@ -12,7 +12,7 @@ import scipy.stats
 """
 
 VOLTAGE_INSTRUMENTAL_UNCERTAINTY_FACTOR = 0.05
-AXES_DECIMAL_POINTS = 2
+AXES_DECIMAL_POINTS = 3
 
 class DokiAvgPoint:
     def __init__(self, insError):
