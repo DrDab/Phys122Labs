@@ -68,8 +68,8 @@ axisFormat = FormatStrFormatter("%%.%df" % AXES_DECIMAL_POINTS)
 def drawGraph(title):
     print("Drawing Graph: \"%s\"" % title)
     plt.title(title)
-    plt.ylabel("Inverse of test voltage")
-    plt.xlabel("Inverse of test resistance")
+    plt.ylabel("Inverse of test voltage (V)")
+    plt.xlabel("Inverse of test resistance (Ω)")
 
     gca = plt.gca()
     gca.yaxis.set_major_formatter(axisFormat)
